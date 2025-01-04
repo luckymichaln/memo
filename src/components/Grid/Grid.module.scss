@@ -1,0 +1,5 @@
+.grid {
+  display: grid;
+  grid-template: auto / repeat(5, 5fr);
+  grid-gap: 32px;
+}
