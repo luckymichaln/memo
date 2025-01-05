@@ -1,3 +1,15 @@
-.heading {
+.Heading {
   margin-bottom: 84px;
+
+  h1 {
+    font-size: 2.8em;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Heading {
+    h1 {
+      font-size: 3.2em;
+    }
+  }
 }

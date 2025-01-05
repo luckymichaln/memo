@@ -1,5 +1,11 @@
 .grid {
   display: grid;
-  grid-template: auto / repeat(5, 5fr);
-  grid-gap: 32px;
+  grid-template: auto / repeat(5, minmax(50px, 1fr));
+  grid-gap: 16px;
+}
+
+@media screen and (min-width: 760px) {
+  .grid {
+    grid-gap: 32px;
+  }
 }
