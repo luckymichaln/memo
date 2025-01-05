@@ -1,19 +1,36 @@
+import clsx from "clsx";
+
 import styles from "./Card.module.scss";
 
 type CardProps = {
   emoji: string;
-  onClick: (emoji: string) => void;
+  index: number;
+  onClick: (emoji: string, index: number) => void;
+  isClicked: boolean;
+  isMatched: boolean;
 };
 
-export const Card = ({ emoji, onClick }: CardProps) => {
+export const Card = ({
+  emoji,
+  index,
+  onClick,
+  isClicked,
+  isMatched,
+}: CardProps) => {
+  const cardClass = clsx(styles.Card, {
+    [styles.CardMatched]: isMatched,
+    [styles.CardClicked]: isClicked,
+  });
+
+  const cardReverseClass = clsx(styles.cardFace, styles.CardReverse, {
+    [styles.CardFaceMatched]: isMatched,
+  });
+
   return (
-    <div className={styles.card}>
-      <span
-        className="card__face card__face--front"
-        onClick={() => onClick(emoji)}
-      >
-        {emoji}
-      </span>
+    <div className={cardClass} onClick={() => onClick(emoji, index)}>
+      <span className={clsx(styles.CardFace, styles.CardFront)}>{emoji}</span>
+
+      <span className={cardReverseClass}>{isMatched ? "🎉" : "❔"}</span>
     </div>
   );
 };
