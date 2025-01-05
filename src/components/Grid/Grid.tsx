@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { emojis } from "../../consts/emojis";
+import { emojis } from "../../constans/emojis";
 import { Card } from "../Card/Card";
 
 import styles from "./Grid.module.scss";
