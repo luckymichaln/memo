@@ -5,9 +5,9 @@ import styles from "./Card.module.scss";
 type CardProps = {
   emoji: string;
   index: number;
-  onClick: (emoji: string, index: number) => void;
   isClicked: boolean;
   isMatched: boolean;
+  onClick: (emoji: string, index: number) => void;
 };
 
 export const Card = ({

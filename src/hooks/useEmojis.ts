@@ -1,11 +1,21 @@
 import { useState } from "react";
-import { emojisList, ANIMATION_DELAY_MS } from "../constans/constans";
+import { emojis, ANIMATION_DELAY_MS } from "../constans/constans";
 
-const deafultEmojisState = emojisList.map((emoji) => ({
-  icon: emoji,
-  isClicked: false,
-  isMatched: false,
-}));
+export type EmojiState = {
+  icon: string;
+  isClicked: boolean;
+  isMatched: boolean;
+};
+
+const emojisList = [...emojis, ...emojis.reverse()];
+const deafultEmojisState = emojisList.map(
+  (emoji): EmojiState => ({
+    icon: emoji,
+    isClicked: false,
+    isMatched: false,
+  })
+);
+
 const defaultFirstClickedEmoji = {
   icon: "",
   index: -1,
@@ -27,7 +37,7 @@ export const useEmojis = () => {
     setClicksCount((prev) => prev + 1);
     setFirstClickedEmoji({ icon: emoji, index: index });
 
-    // Flips every clicked card
+    // Flips every card by adding clicked state
     setEmojisState((prev) => {
       const updatedEmojis = [...prev];
       updatedEmojis[index] = { ...updatedEmojis[index], isClicked: true };
@@ -56,7 +66,7 @@ export const useEmojis = () => {
       }, ANIMATION_DELAY_MS * 2.1);
     }
 
-    // Runs every second click and removes clicked state
+    // Removes clicked state on every second click
     if (clicksCount % 2 !== 0) {
       setTimeout(() => {
         setEmojisState((prev) => {
