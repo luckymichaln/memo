@@ -1,12 +1,12 @@
 import { useEmojis } from "../../hooks/useEmojis";
 import { Congrats } from "../Congrats/Congrats";
 import { Grid } from "../Grid/Grid";
-import { TriesCounter } from "../TriesCounter/TriesCounter";
+import { TimeCounter } from "../TimeCounter/TimeCounter";
 
 export const Game = () => {
   const {
     emojisState,
-    triesCount,
+    gameTime,
     isGameFinished,
     handleEmojiClick,
     handleResetEmojiState,
@@ -16,11 +16,11 @@ export const Game = () => {
     <main>
       {!isGameFinished ? (
         <>
-          <TriesCounter count={triesCount} />
+          <TimeCounter time={gameTime} />
           <Grid data={emojisState} onClick={handleEmojiClick} />
         </>
       ) : (
-        <Congrats triesCount={triesCount} onClick={handleResetEmojiState} />
+        <Congrats time={gameTime} onClick={handleResetEmojiState} />
       )}
     </main>
   );

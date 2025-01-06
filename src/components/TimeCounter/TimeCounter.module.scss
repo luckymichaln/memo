@@ -1,0 +1,14 @@
+.TimeCounter {
+  position: relative;
+  margin: 0 auto 32px;
+  max-width: 210px;
+  padding-right: 100px;
+  user-select: none;
+}
+
+.TimeCounterSeconds {
+  position: absolute;
+  top: 0;
+  right: 100px;
+  font-weight: 600;
+}
