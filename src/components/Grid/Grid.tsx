@@ -15,10 +15,10 @@ const defaultFirstClickedEmoji = {
   icon: "",
   index: -1,
 };
-const shuffledEmojis = deafultEmojisState.sort(() => Math.random() - 0.5);
+const shuffledEmojis = () => deafultEmojisState.sort(() => Math.random() - 0.5);
 
 export const Grid = () => {
-  const [emojisState, setEmojisState] = useState(shuffledEmojis);
+  const [emojisState, setEmojisState] = useState(() => shuffledEmojis());
   const [pairsClicksCount, setPairsClicksCount] = useState(0);
   const [pairsMatched, setPairsMatched] = useState(0);
   const [triesCount, setTriesCount] = useState(0);
@@ -83,7 +83,7 @@ export const Grid = () => {
   };
 
   const handleResetGame = () => {
-    setEmojisState(deafultEmojisState.sort(() => Math.random() - 0.5));
+    setEmojisState(shuffledEmojis());
     setFirstClickedEmoji(defaultFirstClickedEmoji);
     setTriesCount(0);
     setPairsMatched(0);
