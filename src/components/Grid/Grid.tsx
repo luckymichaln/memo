@@ -14,23 +14,25 @@ export const Grid = () => {
 
   return (
     <main>
-      {!isGameFinished ? <p>Your tries: {triesCount}</p> : null}
       {!isGameFinished ? (
-        <section className={styles.grid}>
-          {emojisState.map((emoji, i) => {
-            const { icon, isClicked, isMatched } = emoji;
-            return (
-              <Card
-                key={icon + i}
-                emoji={icon}
-                index={i}
-                onClick={handleEmojiClick}
-                isClicked={isClicked}
-                isMatched={isMatched}
-              />
-            );
-          })}
-        </section>
+        <>
+          <p>Your tries: {triesCount}</p>
+          <section className={styles.grid}>
+            {emojisState.map((emoji, i) => {
+              const { icon, isClicked, isMatched } = emoji;
+              return (
+                <Card
+                  key={icon + i}
+                  emoji={icon}
+                  index={i}
+                  onClick={handleEmojiClick}
+                  isClicked={isClicked}
+                  isMatched={isMatched}
+                />
+              );
+            })}
+          </section>
+        </>
       ) : (
         <div className="CongratsBox">
           <h2 style={{ marginBottom: "48px" }}>Congrats! 🎊</h2>
