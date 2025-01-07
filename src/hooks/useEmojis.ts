@@ -27,6 +27,9 @@ const defaultFirstClickedEmoji = {
 const shuffledEmojis = () => deafultEmojisState.sort(() => Math.random() - 0.5);
 
 export const useEmojis = () => {
+  const timeoutId = useRef<number | null>(null);
+  const intervalId = useRef<number | null>(null);
+
   const [clicksCount, setClicksCount] = useState(0);
   const [emojisState, setEmojisState] = useState(() => shuffledEmojis());
   const [pairsMatched, setPairsMatched] = useState(0);
@@ -35,10 +38,7 @@ export const useEmojis = () => {
     defaultFirstClickedEmoji
   );
 
-  const isGameFinished = pairsMatched === emojisList.length / 2;
-
-  const timeoutId = useRef<number | null>(null);
-  const intervalId = useRef<number | null>(null);
+  const isGameFinished = pairsMatched === emojisList.length / 2; // All the pairs are matched
 
   const timer = () => {
     const startTime = Date.now();
@@ -46,9 +46,9 @@ export const useEmojis = () => {
       const currentTime = Date.now();
       const elapsedTime = currentTime - startTime;
       const seconds = Math.floor(elapsedTime / 1000);
-      const milliseconds = Math.floor((elapsedTime % 1000) / 10); // Get two-digit milliseconds
+      const milliseconds = Math.floor((elapsedTime % 1000) / 100); // Get two-digit milliseconds
 
-      setGameTime(`${seconds},${milliseconds.toString().padStart(2, "0")}`);
+      setGameTime(`${seconds},${milliseconds}`);
     }, 100);
 
     return intervalId;
