@@ -33,6 +33,7 @@ export const useEmojis = () => {
   const [clicksCount, setClicksCount] = useState(0);
   const [emojisState, setEmojisState] = useState(() => shuffledEmojis());
   const [pairsMatched, setPairsMatched] = useState(0);
+  const [isClickPossible, setIsClickPossible] = useState(true);
   const [gameTime, setGameTime] = useState("0");
   const [firstClickedEmoji, setFirstClickedEmoji] = useState(
     defaultFirstClickedEmoji
@@ -82,6 +83,8 @@ export const useEmojis = () => {
   }, [setEmojisState, isGameFinished]);
 
   const handleEmojiClick = (emoji: string, index: number) => {
+    if (!isClickPossible) return;
+
     setClicksCount((prev) => prev + 1);
     setFirstClickedEmoji({ icon: emoji, index: index });
 
@@ -116,6 +119,8 @@ export const useEmojis = () => {
 
     // Removes clicked state on every second click
     if (clicksCount % 2 !== 0) {
+      setIsClickPossible(false);
+
       setTimeout(() => {
         setEmojisState((prev) => {
           const updatedEmojis = prev.map((emoji) => ({
@@ -124,6 +129,7 @@ export const useEmojis = () => {
           }));
           return updatedEmojis;
         });
+        setIsClickPossible(true);
       }, ANIMATION_DELAY_MS);
 
       setFirstClickedEmoji(defaultFirstClickedEmoji);
